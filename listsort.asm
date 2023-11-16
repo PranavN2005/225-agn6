@@ -14,11 +14,10 @@ recurSelectionSort:
 #struct Node* recurSelectionSort(struct Node* head) {
 	lw	t0,	16(a0)			# t0 = head->next
 	bne	t0,	zero,	notNull		# if !(head->next == NULL) branch
-	ret					# return head
-	
+	ret					# return head	
+			
 notNull:addi	sp,	sp,	-16
 	sw	ra,	12(sp)
-	sw	s0,	8(sp)
 	mv	t1,	a0			# min = head
 	mv	t2,	zero			# beforeMin = NULL
 forinit:mv	t3,	a0			# ptr = head
@@ -32,16 +31,18 @@ if1:	lw	t5,	8(t4)			# t5 = ptr->next->studentid
 endif1:	mv	t3,	t4			# ptr = ptr->next
 	b	forloop
 
-if2:	beq	t1,	a0,	endif2		# if !(min != head) branch
-	mv	s0,	a0			# s0 = head
-	mv	a0,	??????			# a0 = &head
-	mv	a1,	s0			# a1 = head
+if2:	sw	a0,	8(sp)
+	beq	t1,	a0,	endif2		# if !(min != head) branch	
+	addi	a0,	sp,	8		# a0 = &head
+	lw	a1,	8(sp)			# a1 = head
 	mv	a2,	t1			# a2 = min
 	mv	a3,	t2			# a3 = beforeMin
 	jal	swapNodes			# swapNodes(&head, head, min, beforeMin)
-endif2:	lw	a0,	16(s0)			# a0 = head->next
+	lw	a0,	8(sp)
+endif2:	lw	a0,	16(a0)			# a0 = head->next
 	jal	recurSelectionSort		# recurSelectionSort(head->next);
-	sw	a0,	16(s0)			# head->next = a0
+	lw	t0,	8(sp)
+	sw	a0,	16(t0)			# head->next = a0
 	lw	ra,	12(sp)
 	lw	s0,	8(sp)
 	addi	sp,	sp,	16
