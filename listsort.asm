@@ -1,4 +1,8 @@
-	.globl	recurSelectionSort
+#ListSort by:
+#PRANAV NALLAPERUMAL
+#and
+#SCOTT FRIZELL
+.globl	recurSelectionSort
 recurSelectionSort:
 
 # s0 - head {0-5: name, 8-11: studentid, 12-15: coursenum, 16-19: next}
