@@ -1,5 +1,9 @@
 .globl swap 
 .globl selectionSort
+#ArraySort by:
+#PRANAV NALLAPERUMAL
+#and
+#SCOTT FRIZELL
  
 selectionSort:
 	addi	sp,	sp,	-16
